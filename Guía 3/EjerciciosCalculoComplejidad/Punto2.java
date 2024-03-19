@@ -19,10 +19,6 @@ class Punto2 extends JFrame implements ActionListener {
         txtArea.setEditable(false);
         panel.add(new JScrollPane(txtArea), BorderLayout.CENTER);
 
-        btnCalcular = new JButton("Calcular");
-        panelSur.add(btnCalcular);
-        btnCalcular.addActionListener(this);
-
         btnVolver = new JButton("Volver");
         panelSur.add(btnVolver);
         btnVolver.addActionListener(this);
