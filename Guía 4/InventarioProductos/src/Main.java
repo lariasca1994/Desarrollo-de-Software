@@ -1,7 +1,4 @@
-import com.example.dao.UsuarioDAO;
 import com.example.gui.LoginFrame;
-import com.example.model.Usuario;
-
 import javax.swing.*;
 
 public class Main {
@@ -14,7 +11,7 @@ public class Main {
         }
 
         // Crear y mostrar la pantalla de inicio de sesión
-        LoginFrame loginFrame = new LoginFrame();
+        LoginFrame loginFrame = new LoginFrame(null);
         loginFrame.setVisible(true);
     }
 }

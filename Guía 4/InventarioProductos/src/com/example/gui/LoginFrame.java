@@ -18,7 +18,7 @@ public class LoginFrame extends JFrame {
         this.databaseType = databaseType;
         setTitle("Inicio de Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 200);
+        setSize(512, 400);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
