@@ -1,0 +1,63 @@
+-- Crear el usuario y otorgar permisos
+--CREATE USER BDPagos IDENTIFIED BY Qwerty159;
+--GRANT CONNECT, RESOURCE TO BDPagos;
+
+-- Conectar como el nuevo usuario
+--CONNECT ConexionDBA/Qwerty159;
+
+-- Crear tabla TBPagos
+CREATE TABLE TBPagos (
+    id_pago NUMBER PRIMARY KEY,
+    monto NUMBER,
+    fecha DATE,
+    concepto VARCHAR2(100)
+);
+
+-- Crear secuencia para la generación de IDs de pago
+CREATE SEQUENCE tbpago_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+
+-- Procedimiento almacenado para insertar TBPagos
+CREATE OR REPLACE PROCEDURE insertar_tbpago(
+    monto IN NUMBER,
+    fecha IN DATE,
+    concepto IN VARCHAR2
+) AS
+BEGIN
+    INSERT INTO TBPagos (id_pago, monto, fecha, concepto)
+    VALUES (pago_sequence.NEXTVAL, monto, fecha, concepto);
+    COMMIT;
+END insertar_tbpago;
+
+-- Procedimiento almacenado para actualizar un pago
+CREATE OR REPLACE PROCEDURE actualizar_tbpago(
+    id_pago IN NUMBER,
+    nuevo_monto IN NUMBER,
+    nueva_fecha IN DATE
+) AS
+BEGIN
+    UPDATE TBPagos
+    SET monto = nuevo_monto, fecha = nueva_fecha
+    WHERE id_pago = id_pago;
+    COMMIT;
+END actualizar_tbpago;
+
+-- Procedimiento almacenado para seleccionar todos los TBPagos
+CREATE OR REPLACE PROCEDURE seleccionar_TBPagos(
+    cur OUT SYS_REFCURSOR
+) AS
+BEGIN
+    OPEN cur FOR
+    SELECT id_pago, monto, fecha, concepto
+    FROM TBPagos;
+END seleccionar_TBPagos;
+
+-- Insertar datos de muestra en la tabla TBPagos
+--INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 100.50, TO_DATE('2024-04-09', 'YYYY-MM-DD'), 'Pago de servicios');
+--INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 75.20, TO_DATE('2024-04-08', 'YYYY-MM-DD'), 'Compra de alimentos');
+--INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 200.00, TO_DATE('2024-04-07', 'YYYY-MM-DD'), 'Pago de alquiler');
+--INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 50.75, TO_DATE('2024-04-06', 'YYYY-MM-DD'), 'Compra de gasolina');
+--COMMIT;
