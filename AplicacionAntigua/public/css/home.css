@@ -1,0 +1,61 @@
+#principal {
+	height: 500px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(46, 157, 255, 0.5)), to(rgba(46, 157, 255, 0.22))), url('../images/background.jpg');
+	background-image: linear-gradient(180deg, rgba(46, 157, 255, 0.5), rgba(46, 157, 255, 0.22)), url('../images/background.jpg');
+	background-position: center;
+	background-size: cover;
+}
+
+#principal div {
+	width: 100%;
+	min-height: 100%;
+}
+
+#principal div h1 {
+	color: white;
+}
+
+#principal div p {
+	color: #2894ff;
+}
+
+#content-principal {
+	color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
+.more {
+	border: 1px solid #f7f7f7;
+	color: white;
+}
+
+.box-shadow {
+	padding: 15px;
+	border: 1px solid #dcebf7;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+#events {
+	background-color: #181d20;
+	color: #c8c9ca;
+}
+
+.events {
+	width: 70%;
+}
+
+label {
+	color: #5f7a91;
+}
+
+.link-event {
+	color: white;
+}

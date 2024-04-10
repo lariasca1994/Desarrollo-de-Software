@@ -1,0 +1,45 @@
+body {
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+}
+
+.nav-color {
+	color: #51aaff !important;
+}
+
+.mr-right {
+	margin: 0 0 0 auto !important;
+}
+
+.sections {
+	padding: 5%;
+}
+
+.titles {
+	margin-bottom: 2em;
+}
+
+.space {
+	width: 30px;
+}
+
+.custom-border {
+	border-bottom: 1px solid #cfcfdb !important;
+}
+
+#footer {
+	background-color: rgb(234, 236, 240);
+}
+
+#copy {
+	padding: 3%;
+	background-color: rgb(49, 49, 49);
+	color: #f7f7f7;
+}
+
+#map{
+	height: 182px !important;
+	width: 340px !important;
+
+
+}

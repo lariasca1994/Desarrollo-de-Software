@@ -1,0 +1,39 @@
+.sign-up {
+	padding: 5em;
+}
+
+.characteristics h2	{
+	color: red;
+}
+
+.red-word {
+	color: red;
+}
+
+.form-reservation {
+	margin-top: 3em;
+}
+
+.carousel {
+	max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.carousel button {
+	background-color: transparent;
+    position: absolute;
+    top: 50%;
+    color: white;
+}
+
+.carousel #avanzar {
+	right: 0;
+}
+
+#imagen {
+	width: 100%;
+    height: 190px;
+    background-size: cover;
+    background-position: center;
+}

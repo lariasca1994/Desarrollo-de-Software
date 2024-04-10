@@ -1,0 +1,19 @@
+.complete-btn {
+	width: 100%;
+}
+
+.sign-in {
+	padding: 5em;
+}
+
+.text-error {
+	color: red;
+}
+
+.emailHelp {
+	display: none;
+}
+
+.message-sign-up {
+	font-size: 13px;
+}
