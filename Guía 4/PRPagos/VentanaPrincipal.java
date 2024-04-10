@@ -13,7 +13,7 @@ public class VentanaPrincipal extends JFrame {
     private JButton btnIngresar;
     private JButton btnSalir;
 
-    public VentanaPrincipal() {
+    public VentanaPrincipal(String nombre) {
         super("Sistema de Pagos");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,9 +68,9 @@ public class VentanaPrincipal extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                VentanaPrincipal ventana = new VentanaPrincipal();
+                VentanaPrincipal ventana = new VentanaPrincipal(title);
                 ventana.setVisible(true);
             }
         });
     }
-}   
+} 

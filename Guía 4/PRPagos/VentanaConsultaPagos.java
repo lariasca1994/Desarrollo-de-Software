@@ -21,6 +21,7 @@ public class VentanaConsultaPagos extends JFrame {
     private JTable tablaPagos;
     private JLabel lblTotalPagado;
     private JButton btnModificar;
+    private JButton btnVolver;
     @SuppressWarnings("unused")
     private JTextField txtMonto;
     @SuppressWarnings("unused")
@@ -49,11 +50,22 @@ public class VentanaConsultaPagos extends JFrame {
             }
         });
 
+        // Botón de Volver
+        btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
         // Crear panel y agregar componentes
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(scrollPane, BorderLayout.CENTER);
         panel.add(lblTotalPagado, BorderLayout.SOUTH);
-        panel.add(btnModificar, BorderLayout.NORTH);
+        JPanel panelBotones = new JPanel(new BorderLayout());
+        panelBotones.add(btnModificar, BorderLayout.WEST);
+        panelBotones.add(btnVolver, BorderLayout.EAST);
+        panel.add(panelBotones, BorderLayout.NORTH);
 
         // Agregar panel a la ventana
         getContentPane().add(panel);

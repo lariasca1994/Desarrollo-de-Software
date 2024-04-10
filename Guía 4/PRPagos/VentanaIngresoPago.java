@@ -26,14 +26,14 @@ public class VentanaIngresoPago extends JFrame {
 
     public VentanaIngresoPago() {
         super("Ingresar Pago");
-        setSize(400, 300);
+        setSize(200, 150);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Crear componentes
         JLabel lblMonto = new JLabel("Monto:");
         txtMonto = new JTextField();
-        JLabel lblFecha = new JLabel("Fecha (dd/MM/yyyy):");
+        JLabel lblFecha = new JLabel("Fecha (d/m/yyyy):");
         txtFecha = new JTextField();
         JLabel lblConcepto = new JLabel("Concepto:");
         txtConcepto = new JTextField();
