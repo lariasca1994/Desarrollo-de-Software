@@ -2,10 +2,10 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +28,7 @@ public class VentanaModificarPago extends JFrame {
 
     public VentanaModificarPago(int idPago, double montoActual, java.sql.Date fechaActual, String conceptoActual) {
         super("Modificar Pago");
-        setSize(300, 200);
+        setSize(300, 250);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -58,7 +58,7 @@ public class VentanaModificarPago extends JFrame {
         });
 
         // Crear panel y agregar componentes
-        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         panel.add(lblMonto);
         panel.add(txtMonto);
         panel.add(lblFecha);
@@ -72,7 +72,6 @@ public class VentanaModificarPago extends JFrame {
         getContentPane().add(panel, BorderLayout.CENTER);
     }
 
-    @SuppressWarnings("unused")
     private void modificarPago() {
         try {
             double nuevoMonto = Double.parseDouble(txtMonto.getText());
@@ -82,11 +81,12 @@ public class VentanaModificarPago extends JFrame {
             String nuevoConcepto = txtConcepto.getText();
 
             Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/orcl", "ConexionDBA", "Qwerty159");
-            PreparedStatement stmt = conn.prepareStatement("CALL actualizar_tbpago(?, ?, ?)");
+            CallableStatement stmt = conn.prepareCall("{CALL actualizar_tbpago(?, ?, ?, ?)}");
             stmt.setInt(1, idPago);
             stmt.setDouble(2, nuevoMonto);
             stmt.setDate(3, nuevoFecha);
-            stmt.executeUpdate();
+            stmt.setString(4, nuevoConcepto);
+            stmt.execute();
 
             stmt.close();
             conn.close();

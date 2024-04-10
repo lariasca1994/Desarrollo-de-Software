@@ -2,9 +2,10 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,16 +65,36 @@ public class VentanaRecuperarContrasena extends JFrame {
 
     private void recuperarContrasena() {
         String correo = txtCorreo.getText();
+        String nuevaContrasena = new String(txtNuevaContrasena.getPassword());
 
         if (validarCorreo(correo)) {
             try {
                 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/orcl", "ConexionDBA", "Qwerty159");
-                CallableStatement stmt = conn.prepareCall("{CALL recuperar_contrasena(?, ?)}");
-                stmt.setString(1, correo);
-                stmt.setString(2, new String(txtNuevaContrasena.getPassword()));
-                stmt.execute();
 
-                JOptionPane.showMessageDialog(this, "Contraseña recuperada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Verificar si el usuario existe en la tabla TBPLogin
+                PreparedStatement stmt = conn.prepareStatement("SELECT usuario FROM TBPLogin WHERE usuario = ?");
+                stmt.setString(1, correo);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    // Actualizar la contraseña del usuario
+                    PreparedStatement updateStmt = conn.prepareStatement("UPDATE TBPLogin SET password = ? WHERE usuario = ?");
+                    updateStmt.setString(1, nuevaContrasena);
+                    updateStmt.setString(2, correo);
+                    int rowsAffected = updateStmt.executeUpdate();
+
+                    if (rowsAffected == 1) {
+                        JOptionPane.showMessageDialog(this, "Contraseña recuperada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error al recuperar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "El correo electrónico no está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                rs.close();
+                stmt.close();
+                conn.close();
                 dispose();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error al recuperar la contraseña: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -85,7 +106,7 @@ public class VentanaRecuperarContrasena extends JFrame {
 
     private boolean validarCorreo(String correo) {
         String regex = "^[a-zA-Z0-9_.+-]+@EAN.com$";
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(correo);
         return matcher.matches();
     }

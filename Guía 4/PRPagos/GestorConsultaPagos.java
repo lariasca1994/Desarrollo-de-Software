@@ -91,7 +91,6 @@ public class GestorConsultaPagos extends JFrame {
     }
 
     public void setModal(boolean b) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setModal'");
+            throw new UnsupportedOperationException("Unimplemented method 'setModal'");
     }
 }

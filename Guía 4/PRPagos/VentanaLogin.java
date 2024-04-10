@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+@SuppressWarnings("unused")
 public class VentanaLogin extends JFrame {
     private JTextField txtUsuario;
     private JPasswordField txtContrasena;

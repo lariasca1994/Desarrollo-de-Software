@@ -2,12 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+@SuppressWarnings("unused")
 public class VentanaCrearUsuario extends JFrame {
     private JTextField txtUsuario;
     private JTextField txtNombre;
@@ -72,27 +73,25 @@ public class VentanaCrearUsuario extends JFrame {
         String nombre = txtNombre.getText();
         String contrasena = new String(txtContrasena.getPassword());
 
-        if (validarUsuario(usuario)) {
-            try {
-                Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/orcl", "ConexionDBA", "Qwerty159");
-                CallableStatement stmt = conn.prepareCall("{CALL crear_usuario_app(?, ?, ?)}");
-                stmt.setString(1, usuario);
-                stmt.setString(2, nombre);
-                stmt.setString(3, contrasena);
-                stmt.execute();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/orcl", "ConexionDBA", "Qwerty159");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO TBPLogin (id, usuario, nombre, password) VALUES (tblogin_sequence.NEXTVAL, ?, ?, ?)");
+            stmt.setString(1, usuario);
+            stmt.setString(2, nombre);
+            stmt.setString(3, contrasena);
+            int rowsAffected = stmt.executeUpdate();
 
+            if (rowsAffected == 1) {
                 JOptionPane.showMessageDialog(this, "Usuario creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error al crear el usuario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al crear el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "El usuario no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
-    private boolean validarUsuario(String usuario) {
-        // Puedes agregar más validaciones si lo deseas
-        return usuario.length() >= 5;
+            stmt.close();
+            conn.close();
+            dispose();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al crear el usuario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

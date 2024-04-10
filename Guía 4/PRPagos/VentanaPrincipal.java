@@ -67,6 +67,8 @@ public class VentanaPrincipal extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+            private String title;
+
             public void run() {
                 VentanaPrincipal ventana = new VentanaPrincipal(title);
                 ventana.setVisible(true);
