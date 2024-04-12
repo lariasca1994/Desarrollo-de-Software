@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "ojdbc11",
+        "PRPagos/lib/ojdbc11.jar"
+    ]
+}
