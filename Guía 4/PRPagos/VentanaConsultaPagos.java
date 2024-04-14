@@ -116,9 +116,13 @@ public class VentanaConsultaPagos extends JFrame {
             java.sql.Date fechaActual = (java.sql.Date) tablaPagos.getValueAt(selectedRow, 2);
             String conceptoActual = (String) tablaPagos.getValueAt(selectedRow, 3);
 
-            VentanaModificarPago ventanaModificarPago = new VentanaModificarPago(idPago, montoActual, fechaActual, conceptoActual);
+            VentanaModificarPago ventanaModificarPago = new VentanaModificarPago(idPago, montoActual, fechaActual, conceptoActual, this);
             ventanaModificarPago.setVisible(true);
         }
+    }
+
+    public void actualizarListaDePagos() {
+        cargarDatosDePagos();
     }
 
     public void actualizarTotalPagado(double total) {

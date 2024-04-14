@@ -25,14 +25,16 @@ public class VentanaModificarPago extends JFrame {
     private JButton btnModificar;
     private JButton btnVolver;
     private int idPago;
+    private VentanaConsultaPagos ventanaConsultaPagos;
 
-    public VentanaModificarPago(int idPago, double montoActual, java.sql.Date fechaActual, String conceptoActual) {
+    public VentanaModificarPago(int idPago, double montoActual, java.sql.Date fechaActual, String conceptoActual, VentanaConsultaPagos ventanaConsultaPagos) {
         super("Modificar Pago");
         setSize(300, 250);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         this.idPago = idPago;
+        this.ventanaConsultaPagos = ventanaConsultaPagos;
 
         // Crear componentes
         JLabel lblMonto = new JLabel("Monto:");
@@ -92,6 +94,7 @@ public class VentanaModificarPago extends JFrame {
             conn.close();
 
             JOptionPane.showMessageDialog(this, "Pago modificado correctamente.");
+            ventanaConsultaPagos.actualizarListaDePagos(); // Llamar al método de actualización
             dispose();
         } catch (NumberFormatException | ParseException | SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al modificar el pago: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
