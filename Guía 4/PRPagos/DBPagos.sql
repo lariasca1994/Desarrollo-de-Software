@@ -92,11 +92,11 @@ NOCACHE
 NOCYCLE;
 
 -- Insertar datos de muestra en la tabla TBPagos
---INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 100.50, TO_DATE('2024-04-09', 'YYYY-MM-DD'), 'Pago de servicios');
---INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 75.20, TO_DATE('2024-04-08', 'YYYY-MM-DD'), 'Compra de alimentos');
---INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 200.00, TO_DATE('2024-04-07', 'YYYY-MM-DD'), 'Pago de alquiler');
---INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 50.75, TO_DATE('2024-04-06', 'YYYY-MM-DD'), 'Compra de gasolina');
---COMMIT;
+INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 2500, TO_DATE('2024-04-09', 'YYYY-MM-DD'), 'Pago de servicios');
+INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 80000, TO_DATE('2024-04-08', 'YYYY-MM-DD'), 'Compra de alimentos');
+INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 130000, TO_DATE('2024-04-07', 'YYYY-MM-DD'), 'Pago de alquiler');
+INSERT INTO TBPagos (id_pago, monto, fecha, concepto) VALUES (pago_sequence.NEXTVAL, 70300, TO_DATE('2024-04-06', 'YYYY-MM-DD'), 'Compra de gasolina');
+COMMIT;
 
 
 --INSERT INTO TBPLogin (id, usuario, nombre, password) VALUES (tblogin_sequence.NEXTVAL, 'usuario1@ean.com', 'Usuario 1', '123456');
